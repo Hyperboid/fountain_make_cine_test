@@ -32,7 +32,7 @@ function FMBall:init(x, y, type)
         self.physics.speed_y = (-0.5 + Utils.random(-1)) * scale
         self.physics.gravity = (0.06 + Utils.random(0.02)) * scale
         self.physics.gravity_direction = math.rad(360 - (85 + Utils.random(10)))
-        self.physics.friction = 0.05
+        self.physics.friction = 0.05 * scale
     else
         self.scale_x = 0.1 * scale
         self.scale_y = 0.1 * scale
