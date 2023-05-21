@@ -50,7 +50,9 @@ function(cutscene)
 
     cutscene:playSound("fountain_make")
     cutscene:setAnimation(kris, "make_fountain/make")
-    cutscene:wait(7)
+
+    local center_x = kris_x + 18 * 2
+    local center_y = kris_y + 57 * 2
 
     cutscene:setSprite(kris, "make_fountain/make_stop")
     cutscene:wait(3)
