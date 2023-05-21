@@ -29,7 +29,7 @@ function FMScreenCover:draw()
     local ball_x = {}
     love.graphics.setColor(COLORS["white"])
     for i = 0, 12 - 1 do
-        ball_x[i] = ((self.timer + i * 40) % 400) + -40
+        ball_x[i] = -40 + ((self.timer + i * 40) % 400)
         love.graphics.draw(self.ball, ball_x[i], self.cur_height - 80 + math.sin(i + self.timer / 8) * 7, 0, 1.05, 1.05, self.ball_ox, self.ball_oy)
     end
     love.graphics.setColor(COLORS["black"])
