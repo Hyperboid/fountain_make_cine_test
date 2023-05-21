@@ -4,9 +4,9 @@ function(cutscene)
     local kris = cutscene:getCharacter("kris")
 
     cutscene:detachCamera()
-    kris:setPosition(484*2 + kris.width + 2, 140*2 + kris.height*2)
+    kris:setPosition(990, 345)
+    kris.layer = kris.layer + 25
     cutscene:panTo(950, 0, 0)
-    cutscene:wait(1)
 
     cutscene:setAnimation(kris, "make_fountain/grab_knife")
     cutscene:wait(70/30)
@@ -50,4 +50,57 @@ function(cutscene)
 
     cutscene:playSound("fountain_make")
     cutscene:setAnimation(kris, "make_fountain/make")
+    cutscene:wait(7)
+
+    cutscene:setSprite(kris, "make_fountain/make_stop")
+    cutscene:wait(3)
+
+    kris.layer = kris.layer - 25
+    cutscene:setSprite(kris, "make_fountain/jump_off")
+    kris.physics.speed_y = -16
+    kris.physics.speed_x = -2
+    kris.physics.gravity = 1
+    --[[
+        ballcheck = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_fountainball, 0, 1)
+        if (ballcheck != noone)
+        {
+            with (ballcheck)
+            {
+                if (back == false)
+                {
+                    hspeed += (-4 + random(8))
+                    vspeed -= random(3)
+                    backball.hspeed = hspeed
+                    backball.vspeed = vspeed
+                }
+            }
+        }
+    ]]
+    cutscene:wait(function() return kris.y >= 360 end)
+    cutscene:setSprite(kris, "make_fountain/jump_off_landed")
+    kris.physics.speed_y = 0
+    kris.physics.speed_x = 0
+    kris.physics.gravity = 0
+    cutscene:wait(2)
+
+    cutscene:wait(cutscene:setAnimation(kris, "make_fountain/stand_up"))
+    cutscene:setSprite(kris, "make_fountain/walk_scare/left", 0)
+    kris.sprite:stop()
+    cutscene:wait(0.5)
+    local function shakeStep(x, y)
+        kris.sprite:stop()
+        kris.sprite:setFrame(2)
+        kris:move(x, y)
+        cutscene:wait(0.5)
+        kris.sprite:setFrame(1)
+        cutscene:shakeCharacter(kris)
+    end
+    shakeStep(-20, 16)
+    cutscene:wait(0.5)
+    shakeStep(-8, 16)
+    cutscene:wait(0.5)
+    for _ = 1, 8 do
+        shakeStep(-8, 0)
+        cutscene:wait(0.5)
+    end
 end

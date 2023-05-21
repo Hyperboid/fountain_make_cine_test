@@ -10,7 +10,7 @@ FMBall.TYPES = {
 }
 
 function FMBall:init(x, y, type)
-    super.init(self, "world/cutscenes/fountain_make/ball", x, y, nil, nil, nil)
+    super.init(self, "effects/make_fountain/ball", x, y, nil, nil, nil)
 
     self:setOriginExact(24, 24)
     --depth = 12

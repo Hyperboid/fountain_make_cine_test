@@ -9,21 +9,30 @@ return {
   height = 12,
   tilewidth = 40,
   tileheight = 40,
-  nextlayerid = 7,
+  nextlayerid = 8,
   nextobjectid = 47,
   backgroundcolor = { 193, 193, 193 },
   properties = {
     ["light"] = true
   },
-  tilesets = {
-    {
-      name = "room1",
-      firstgid = 1,
-      filename = "../tilesets/room1.tsx",
-      exportfilename = "../tilesets/room1.lua"
-    }
-  },
+  tilesets = {},
   layers = {
+    {
+      type = "imagelayer",
+      image = "../../../assets/sprites/world/maps/tilesets/room1/spr_cutscene_32_bg_room_dark.png",
+      id = 7,
+      name = "background",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      repeatx = false,
+      repeaty = false,
+      properties = {}
+    },
     {
       type = "objectgroup",
       draworder = "topdown",
@@ -105,22 +114,7 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {
-        {
-          id = 42,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 924,
-          y = 324,
-          width = 144,
-          height = 40,
-          rotation = 0,
-          gid = 1,
-          visible = true,
-          properties = {}
-        }
-      }
+      objects = {}
     },
     {
       type = "objectgroup",
@@ -146,78 +140,6 @@ return {
           width = 0,
           height = 0,
           rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 6,
-      name = "objects_top",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 43,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1378,
-          y = 0,
-          width = 22,
-          height = 480,
-          rotation = 0,
-          gid = 2,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 44,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 0,
-          y = 0,
-          width = 22,
-          height = 480,
-          rotation = 0,
-          gid = 2,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 45,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1400,
-          y = 458,
-          width = 22,
-          height = 1400,
-          rotation = 90,
-          gid = 2,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 46,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 1400,
-          y = 0,
-          width = 22,
-          height = 1400,
-          rotation = 90,
-          gid = 2,
           visible = true,
           properties = {}
         }

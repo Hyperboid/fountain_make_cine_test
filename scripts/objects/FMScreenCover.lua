@@ -8,7 +8,7 @@ function FMScreenCover:init()
     self:setParallax(0, 0)
     self:setScale(2, 2)
 
-    self.ball = Assets.getTexture("world/cutscenes/fountain_make/ball")
+    self.ball = Assets.getTexture("effects/make_fountain/ball")
     self.ball_ox = 24
     self.ball_oy = 24
 
