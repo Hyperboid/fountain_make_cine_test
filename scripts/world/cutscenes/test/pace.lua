@@ -26,7 +26,6 @@ function(cutscene)
     local blaze_vfx_timer = 0
     cutscene:setAnimation(kris, "make_fountain/target")
     Game.world.timer:every(1/30, function()
-        if not blaze_vfx then return false end
         if blaze_vfx_off_for_one_frame_for_some_reason then
             blaze_vfx_off_for_one_frame_for_some_reason = false
         else
@@ -41,6 +40,7 @@ function(cutscene)
             blaze_shine:setLayer(kris.layer - 1)
             Game.world:addChild(blaze_shine)
         end
+        return blaze_vfx
     end)
     cutscene:wait(1/3)
     blaze_vfx_off_for_one_frame_for_some_reason = true
