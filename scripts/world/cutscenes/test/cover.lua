@@ -1,3 +1,3 @@
 return function()
-    Game.world:spawnObject(FMScreenCover(), "objects")
+    Game.world:spawnObject(FMCeilingFog(), "objects")
 end

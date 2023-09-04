@@ -28,15 +28,16 @@ function FMBall:init(x, y, type)
         self.scale_x = 0.05 * scale
         self.scale_y = 0.05 * scale
         self.color = COLORS["black"]
-        self.physics.speed_x = (-1 + Utils.random(2)) * 2
-        self.physics.speed_y = (-0.5 + Utils.random(-1)) * 2
         self.physics.gravity = (0.06 + Utils.random(0.02)) * scale
         self.physics.gravity_direction = math.rad(360 - (85 + Utils.random(10)))
         self.physics.friction = 0.05 * scale
+        self.physics.speed_x = (-1 + Utils.random(2)) * scale
+        self.physics.speed_y = (-0.5 + Utils.random(-1)) * scale
         self:setHitbox(0, 0, self.width, self.height)
     else
-        self.scale_x = 0.1 * scale
-        self.scale_y = 0.1 * scale
+        -- accuracy !!
+        self.scale_x = 0.05 * scale + 0.05
+        self.scale_y = 0.05 * scale + 0.05
         self.color = COLORS["white"]
         self.collidable = false
     end

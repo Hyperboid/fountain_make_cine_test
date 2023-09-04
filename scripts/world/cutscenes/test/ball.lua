@@ -3,8 +3,10 @@ return function(cutscene)
     cutscene:enableMovement()
     local part_maker = Game.world.timer:every(1/30, function()
         local x, y = Game.world.player:getRelativePos(Game.world.player.width/2, Game.world.player.height)
-        Game.world:spawnObject(FMBall(x, y), Game.world.player.layer + 1)
+        Game.world:spawnObject(FMBall(x, y), Game.world.player.layer + 2)
     end)
+    cutscene:wait((90+90+10)/30)
+    Game.world:spawnObject(FMCeilingFog(), Game.world.player.layer + 3)
     --[[Game.world.timer:script(function(wait)
         local f = 0
         while f < 30 do

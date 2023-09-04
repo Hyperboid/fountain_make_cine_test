@@ -1,8 +1,8 @@
----@class FMScreenCover : Sprite
----@overload fun(...) : FMScreenCover
-local FMScreenCover, super = Class(Object)
+---@class FMCeilingFog : Sprite
+---@overload fun(...) : FMCeilingFog
+local FMCeilingFog, super = Class(Object)
 
-function FMScreenCover:init()
+function FMCeilingFog:init()
     super.init(self, 0, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
 
     self:setParallax(0, 0)
@@ -16,7 +16,7 @@ function FMScreenCover:init()
     self.cur_height = 0
 end
 
-function FMScreenCover:update()
+function FMCeilingFog:update()
     self.timer = self.timer + DTMULT
     if self.cur_height < 120 then
         self.cur_height = self.cur_height + (math.sin(self.timer / 18) + 0.3) * DTMULT
@@ -25,7 +25,7 @@ function FMScreenCover:update()
     end
 end
 
-function FMScreenCover:draw()
+function FMCeilingFog:draw()
     local ball_x = {}
     love.graphics.setColor(COLORS["white"])
     for i = 0, 12 - 1 do
@@ -44,4 +44,4 @@ function FMScreenCover:draw()
     rectAxis1toAxis2("fill", 0, self.cur_height - 80, self.width, -90)
 end
 
-return FMScreenCover
+return FMCeilingFog
