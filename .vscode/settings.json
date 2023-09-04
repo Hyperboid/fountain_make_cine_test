@@ -11,7 +11,7 @@
     },
     "Lua.workspace.library": [
         "${3rd}/love2d/library",
-        "D:\\development\\Kristal",
-        "c:/Users/Dobby/.vscode/extensions/kristal.kristal-vscode-1.1.1/3rd//kristal-lua-docs/library",
-    ]
+        "D:\\development\\Kristal"
+    ],
+    "Lua.workspace.checkThirdParty": false
 }

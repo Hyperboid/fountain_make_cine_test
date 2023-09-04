@@ -58,27 +58,29 @@ function(cutscene)
     cutscene:wait(3)
 
     kris.layer = kris.layer - 25
+    local ball_col_check = true
+    cutscene:during(function()
+        if not ball_col_check then return false end
+
+        Object.startCache()
+        for _,other in ipairs(Game.stage:getObjects(FMBall)) do
+            if other:collidesWith(kris) then
+                assert(other.type ~= FMBall.TYPES.back)
+                local scale = 2
+                other.physics.speed_x = other.physics.speed_x + (-4 + Utils.random(8)) * scale
+                other.physics.speed_y = other.physics.speed_y - (Utils.random(3)) * scale
+                other.back.physics.speed_x = other.physics.speed_x
+                other.back.physics.speed_y = other.physics.speed_y
+            end
+        end
+        Object.endCache()
+    end)
     cutscene:setSprite(kris, "make_fountain/jump_off")
     kris.physics.speed_y = -16
     kris.physics.speed_x = -2
     kris.physics.gravity = 1
-    --[[
-        ballcheck = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_fountainball, 0, 1)
-        if (ballcheck != noone)
-        {
-            with (ballcheck)
-            {
-                if (back == false)
-                {
-                    hspeed += (-4 + random(8))
-                    vspeed -= random(3)
-                    backball.hspeed = hspeed
-                    backball.vspeed = vspeed
-                }
-            }
-        }
-    ]]
     cutscene:wait(function() return kris.y >= 360 end)
+    ball_col_check = false
     cutscene:setSprite(kris, "make_fountain/jump_off_landed")
     kris.physics.speed_y = 0
     kris.physics.speed_x = 0
