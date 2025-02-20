@@ -68,6 +68,8 @@ function(cutscene)
     cutscene:wait(6)
     white_house:fadeOutAndRemove(.4)
     cutscene:setSprite(kris, "make_fountain/make_stop")
+    local deep_noise = Assets.playSound("deep_noise",1,2)
+    deep_noise:setLooping(true)
     local part_maker = Game.world.map.timer:every(1/30, function()
         local x, y = 1000, 350
             Game.world:spawnObject(FMBall(x, y), Game.world.player.layer - 2)
@@ -131,6 +133,19 @@ function(cutscene)
         shakeStep(-8, 0)
         cutscene:wait(0.5)
     end
+
+    cutscene:wait(function ()
+        return ceiling_fog.cur_height > (280)
+    end)
+    Game.world.timer:doWhile(function ()
+        return deep_noise:getVolume() >= 0
+    end, function ()
+        deep_noise:setVolume(deep_noise:getVolume() - (DT/4))
+    end, function ()
+        deep_noise:stop()
+        deep_noise:release()
+        deep_noise = nil
+    end)
     cutscene:wait(function ()
         return ceiling_fog.cur_height > (340)
     end)
