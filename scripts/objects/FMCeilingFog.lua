@@ -1,4 +1,4 @@
----@class FMCeilingFog : Sprite
+---@class FMCeilingFog : Object
 ---@overload fun(...) : FMCeilingFog
 local FMCeilingFog, super = Class(Object)
 
