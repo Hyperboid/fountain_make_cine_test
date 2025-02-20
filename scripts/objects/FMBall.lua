@@ -5,7 +5,7 @@ local FMBall, super = Class(Sprite)
 ---@enum FMBall.types
 -- I hate my life
 FMBall.TYPES = {
-	fore = 1,
+    fore = 1,
     back = 2,
 }
 
@@ -31,7 +31,7 @@ function FMBall:init(x, y, type)
         self.physics.gravity = (0.06 + Utils.random(0.02)) * scale
         self.physics.gravity_direction = math.rad(360 - (85 + Utils.random(10)))
         self.physics.friction = 0.05 * scale
-        self.physics.speed_x = (-1 + Utils.random(2)) * scale
+        self.physics.speed_x = (Utils.random(-1.5,1.5)) * scale
         self.physics.speed_y = (-0.5 + Utils.random(-1)) * scale
         self:setHitbox(0, 0, self.width, self.height)
     else
