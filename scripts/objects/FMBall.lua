@@ -28,8 +28,9 @@ function FMBall:init(x, y, type)
         self.scale_x = 0.05 * scale
         self.scale_y = 0.05 * scale
         self.color = COLORS["black"]
-        self.physics.gravity = (0.06 + Utils.random(0.02)) * scale
-        self.physics.gravity_direction = math.rad(360 - (85 + Utils.random(10)))
+        self.physics.gravity = (0.07 + Utils.random(0.02)) * scale
+        local angle_w = 30
+        self.physics.gravity_direction = math.rad(270 + (Utils.random(-angle_w,angle_w)))
         self.physics.friction = 0.05 * scale
         self.physics.speed_x = (Utils.random(-1.5,1.5)) * scale
         self.physics.speed_y = (-0.5 + Utils.random(-1)) * scale
