@@ -68,11 +68,12 @@ function(cutscene)
     cutscene:wait(6)
     white_house:fadeOutAndRemove(.4)
     cutscene:setSprite(kris, "make_fountain/make_stop")
-    local part_maker = Game.world.timer:every(1/30, function()
+    local part_maker = Game.world.map.timer:every(1/30, function()
         local x, y = 1000, 350
             Game.world:spawnObject(FMBall(x, y), Game.world.player.layer - 2)
     end)
-    Game.world:spawnObject(FMCeilingFog(), Game.world.player.layer + 3)
+    local ceiling_fog = FMCeilingFog()
+    Game.world:spawnObject(ceiling_fog, Game.world.player.layer + 3)
     cutscene:wait(3)
     
 
@@ -130,4 +131,7 @@ function(cutscene)
         shakeStep(-8, 0)
         cutscene:wait(0.5)
     end
+    cutscene:wait(function ()
+        return ceiling_fog.cur_height > (340)
+    end)
 end
