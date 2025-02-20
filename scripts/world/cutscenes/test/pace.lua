@@ -2,7 +2,7 @@ return
 ---@param cutscene WorldCutscene
 function(cutscene)
     local kris = cutscene:getCharacter("kris")
-
+    Game:setFlag("balls", true)
     cutscene:detachCamera()
     kris:setPosition(990, 345)
     kris.layer = kris.layer + 25
@@ -48,22 +48,42 @@ function(cutscene)
     cutscene:wait(1/3)
     blaze_vfx = false
 
-    cutscene:playSound("fountain_make")
+    cutscene:playSound("fountain_make", 1, Game.world.timescale)
+    local pillar = FMPillar(kris.x, kris.y)
+    Game.world:spawnObject(pillar, kris.layer - 0.5)
+    
+    local white_house = Sprite("world/maps/tilesets/room1/spr_cutscene_32_room_black_white", 1, 1)
+    white_house:setColor(0.9,0.9,0.9)
+    white_house:setLayer(kris.layer - 1)
+    white_house.alpha = 0
+    white_house:fadeTo(1, 0.3)
+    Game.world:addChild(white_house)
     cutscene:setAnimation(kris, "make_fountain/make")
 
     local center_x = kris_x + 18 * 2
     local center_y = kris_y + 57 * 2
+    cutscene:wait(0.2)
+    cutscene:setAnimation(kris, "make_fountain/make_loop")
 
+    cutscene:wait(6)
+    white_house:fadeOutAndRemove(.4)
     cutscene:setSprite(kris, "make_fountain/make_stop")
+    local part_maker = Game.world.timer:every(1/30, function()
+        local x, y = 1000, 350
+            Game.world:spawnObject(FMBall(x, y), Game.world.player.layer - 2)
+    end)
+    Game.world:spawnObject(FMCeilingFog(), Game.world.player.layer + 3)
     cutscene:wait(3)
+    
 
-    kris.layer = kris.layer - 25
+    --kris.layer = kris.layer - 25
     local ball_col_check = true
     cutscene:during(function()
         if not ball_col_check then return false end
 
         Object.startCache()
         for _,other in ipairs(Game.stage:getObjects(FMBall)) do
+            ---@cast other FMBall
             if other:collidesWith(kris) then
                 assert(other.type ~= FMBall.TYPES.back)
                 local scale = 2
@@ -76,17 +96,20 @@ function(cutscene)
         Object.endCache()
     end)
     cutscene:setSprite(kris, "make_fountain/jump_off")
-    kris.physics.speed_y = -16
+    kris.timescale = 2
+    kris.physics.speed_y = -16/4
     kris.physics.speed_x = -2
-    kris.physics.gravity = 1
+    kris.physics.gravity = 1/2
     cutscene:wait(function() return kris.y >= 360 end)
+    kris.timescale = 1
+    kris.y = 360
     ball_col_check = false
     cutscene:setSprite(kris, "make_fountain/jump_off_landed")
     kris.physics.speed_y = 0
     kris.physics.speed_x = 0
     kris.physics.gravity = 0
     cutscene:wait(2)
-
+    
     cutscene:wait(cutscene:setAnimation(kris, "make_fountain/stand_up"))
     cutscene:setSprite(kris, "make_fountain/walk_scare/left", 0)
     kris.sprite:stop()
@@ -103,7 +126,7 @@ function(cutscene)
     cutscene:wait(0.5)
     shakeStep(-8, 16)
     cutscene:wait(0.5)
-    for _ = 1, 8 do
+    for _ = 1, 4 do
         shakeStep(-8, 0)
         cutscene:wait(0.5)
     end
