@@ -49,7 +49,7 @@ function(cutscene)
     blaze_vfx = false
 
     cutscene:playSound("fountain_make", 1, Game.world.timescale)
-    local pillar = FMPillar(kris.x, kris.y)
+    local pillar = FMPillar(kris.x, kris.y, kris)
     Game.world:spawnObject(pillar, kris.layer - 0.5)
     
     local white_house = Sprite("world/maps/tilesets/room1/spr_cutscene_32_room_black_white", 1, 1)
