@@ -15,7 +15,7 @@ function FMPillar:init(x, y, maker)
     self.timer = Timer()
     self:addChild(self.timer)
     self.timer:every(0.2, function ()
-        local blaze = Sprite("effects/make_fountain/blaze_shine")
+        local blaze = Sprite("effects/make_fountain/blaze_shine", self.width/2, self.height)
         blaze:setOrigin(.5)
         blaze:setScale(20,1)
         blaze.graphics.grow_x = 2
@@ -45,6 +45,7 @@ function FMPillar:drawCoolEllipse(height, base_width)
 end
 
 function FMPillar:draw()
+    love.graphics.push()
     love.graphics.translate(80, 720)
     local height = Utils.clampMap(self.anim_timer, 0.2, 0.3, 3, 320)
     love.graphics.scale(Utils.clampMap(self.anim_timer, 0.1, 0.2, 2, 1),1)
@@ -58,6 +59,7 @@ function FMPillar:draw()
         love.graphics.setFont(Assets.getFont("main_mono"))
         love.graphics.print("timer:" .. self.anim_timer)
     end
+    love.graphics.pop()
     super.draw(self)
 end
 
