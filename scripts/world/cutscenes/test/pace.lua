@@ -100,8 +100,9 @@ function(cutscene)
         Object.endCache()
     end)
     cutscene:setSprite(kris, "make_fountain/jump_off")
-    kris.timescale = 2
-    kris.physics.speed_y = -16/4
+    -- TODO: Actually make this accurate
+    kris.timescale = 1.5
+    kris.physics.speed_y = -16/3
     kris.physics.speed_x = -2
     kris.physics.gravity = 1/2
     cutscene:wait(function() return kris.y >= 360 end)
