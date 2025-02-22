@@ -11,12 +11,23 @@ function FMPillar:init(x, y, maker)
     if self.maker then
         self.maker:addFX(ShaderFX("fm_invert", self.shader_params), "fm_invert")
     end
-    self.draw_children_above = 0
-    self.draw_children_below =-0.0001
     self.anim_timer = 0
+    self.timer = Timer()
+    self:addChild(self.timer)
+    self.timer:every(0.2, function ()
+        local blaze = Sprite("effects/make_fountain/blaze_shine")
+        blaze:setOrigin(.5)
+        blaze:setScale(20,1)
+        blaze.graphics.grow_x = 2
+        blaze.graphics.grow_y = 0.15
+        blaze:fadeOutAndRemove(.5)
+        self:addChild(blaze)
+        return self.anim_timer < 6
+    end)
 end
 
 function FMPillar:update()
+    super.update(self)
     self.anim_timer = self.anim_timer + DT
     self.shader_params.inversion = Utils.clampMap(self.anim_timer, 3, 4, 0, 1)
     if self.anim_timer >= 7 then self:remove() end
@@ -47,6 +58,7 @@ function FMPillar:draw()
         love.graphics.setFont(Assets.getFont("main_mono"))
         love.graphics.print("timer:" .. self.anim_timer)
     end
+    super.draw(self)
 end
 
 return FMPillar
