@@ -48,7 +48,13 @@ function(cutscene)
     cutscene:wait(1/3)
     blaze_vfx = false
 
-    cutscene:playSound("fountain_make", 1, Game.world.timescale)
+    do
+        local fmake = Assets.playSound("fountain_make", 1, DT/BASE_DT)
+        cutscene:during(function ()
+            if not fmake:isPlaying() then return false end
+            fmake:setPitch(DT/BASE_DT)
+        end)
+    end
     local pillar = FMPillar(kris.x, kris.y, kris)
     Game.world:spawnObject(pillar, kris.layer - 0.5)
     
