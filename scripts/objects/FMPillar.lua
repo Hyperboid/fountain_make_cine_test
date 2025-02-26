@@ -29,7 +29,7 @@ end
 function FMPillar:update()
     super.update(self)
     self.anim_timer = self.anim_timer + DT
-    self.shader_params.inversion = Utils.clampMap(self.anim_timer, 3, 4, 0, 1)
+    self.shader_params.inversion = Utils.clampMap(self.anim_timer, 3.5, 4, 0, 1)
     if self.anim_timer >= 7 then self:remove() end
 end
 
