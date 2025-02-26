@@ -37,8 +37,8 @@ function FMBall:init(x, y, type)
         self:setHitbox(0, 0, self.width, self.height)
     else
         -- accuracy !!
-        self.scale_x = 0.05 * scale + 0.05
-        self.scale_y = 0.05 * scale + 0.05
+        self.scale_x = 0.05 * scale + 0.07
+        self.scale_y = 0.05 * scale + 0.07
         self.color = COLORS["white"]
         self.collidable = false
     end
