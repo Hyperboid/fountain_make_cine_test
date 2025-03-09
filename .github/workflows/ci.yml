@@ -12,7 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          path: ./mod
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
           path: ./kristal
+          repository: KristalTeam/Kristal
 
       - name: Install Dependencies
         run: |
