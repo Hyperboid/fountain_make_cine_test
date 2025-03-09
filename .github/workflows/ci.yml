@@ -25,7 +25,7 @@ jobs:
           rm love.zip
 
       - name: Build
-        uses: Hyperboid/build-mod
+        uses: Hyperboid/build-mod@main
 
       - name: Upload Build
         uses: actions/upload-artifact@v4
